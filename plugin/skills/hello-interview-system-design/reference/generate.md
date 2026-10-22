@@ -90,6 +90,6 @@ Below the line: <items>.
 <…>
 ````
 
-5. Tell the user both paths and suggest `/hello-interview mock <slug>` to practise it.
+5. Tell the user both paths and suggest `/hello-interview-system-design mock <slug>` to practise it.
 
 Write no state.

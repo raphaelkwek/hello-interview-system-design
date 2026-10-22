@@ -39,7 +39,7 @@ Always run it, even if the session was cut short. Load `rubric.md`, and `pattern
 3. **Deep dives**: for each dive, its rung (Bad, Good or Great) and what the Great answer adds, citing a `patterns.md` section by name when one fits.
 4. **Anti-patterns hit**: each AP ID observed, with the moment it happened.
 5. **Phase timing**: a table of phase, target, estimated actual.
-6. **Next**: the two weakest themes to drill and one or two next problems as commands, e.g. `/hello-interview mock ticketmaster`.
+6. **Next**: the two weakest themes to drill and one or two next problems as commands, e.g. `/hello-interview-system-design mock ticketmaster`.
 
 ## Save state
 
