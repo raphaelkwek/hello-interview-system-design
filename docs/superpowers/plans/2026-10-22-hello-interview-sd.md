@@ -12,7 +12,7 @@
 
 **Rules for every task:**
 - Write all prose fresh. Never copy text from `~/.claude/plugins/marketplaces/system-design/` (no license) or from hellointerview.com (copyrighted). Problem *names* are fine.
-- Work in `/Users/raphaelkwek/GitHub/hello-interview-sd`. All paths below are relative to it.
+- Work in the repo root. All paths below are relative to it.
 - Commit messages end with `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 
 ---

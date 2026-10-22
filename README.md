@@ -4,10 +4,12 @@ System design interview practice for Claude Code, following the Hello Interview 
 
 Unofficial; not affiliated with Hello Interview.
 
+Inspired by the structure of [ftvision/system-design-skill](https://github.com/ftvision/system-design-skill) (modes, progress tracking, debriefs). No code or text was copied from it.
+
 ## Install
 
 ```bash
-claude plugin marketplace add ~/GitHub/hello-interview-system-design
+claude plugin marketplace add raphaelkwek/hello-interview-system-design
 claude plugin install hello-interview-system-design@hello-interview-system-design
 ```
 
@@ -25,6 +27,12 @@ claude plugin install hello-interview-system-design@hello-interview-system-desig
 Set a default level: `echo senior > ~/.hello-interview/level.md` (`mid`, `senior` or `staff`).
 
 Progress lives in `~/.hello-interview/runs.md` and `weaknesses.md`.
+
+Or from a local clone: `claude plugin marketplace add /path/to/hello-interview-system-design`.
+
+## License
+
+MIT
 
 ## Develop
 
