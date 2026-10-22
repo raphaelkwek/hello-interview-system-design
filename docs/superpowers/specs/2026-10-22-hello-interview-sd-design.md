@@ -97,7 +97,8 @@ Verdict: `hire / lean hire / lean no hire / no hire` at the resolved level, by o
 
 ### `mock`: Claude = interviewer
 
-- Problem: the argument verbatim, else pick from `topics.md` matching the level and not already in `runs.md`.
+- Problem: the argument (or a generated `question.md` matching it), else pick from `topics.md` matching the level and not already in `runs.md`.
+- Elapsed time is estimated at ~1.5 min per candidate turn; there is no clock.
 - Enforce phases with time callouts ("We're ~7 minutes in, let's move to core entities"). Push back on the anti-patterns. Never volunteer architecture. `pause` drops out of role and then resumes.
 - Deep-dive behaviour by level: mid means the interviewer picks the dives; senior means wait for the candidate to name them and steer only if they miss a critical one; staff means react as a peer. Deep-dive targets are biased toward recurring weak themes.
 - Debrief (never skipped): 4 theme scores with quotes; verdict at level; each deep dive rated Bad/Good/Great with what the Great answer adds (citing `patterns.md` by section); anti-patterns hit (AP IDs with the moment); phase-time table (target vs estimated actual, at ~1.5 min per candidate turn); top 2 themes to drill; 1–2 next problems as commands. Then append to `runs.md` and `weaknesses.md`.
@@ -110,6 +111,7 @@ Verdict: `hire / lean hire / lean no hire / no hire` at the resolved level, by o
 
 ### `postmortem`: diagnose a real interview
 
+- Level: from `--level`, else the level of the real interview (asked first), used for the preamble, scores and state.
 - Input: `--file=<path>`, or questions asked one or two at a time. Never all at once.
 - Rebuild a phase timeline, identify where the candidate left the framework (anti-pattern list), score the 4 themes with verdict, and give "what stronger looked like" per phase. Writes state.
 
@@ -124,9 +126,11 @@ Verdict: `hire / lean hire / lean no hire / no hire` at the resolved level, by o
 | File | Loaded when |
 |---|---|
 | `framework.md` | Every mode (it is the method). |
-| `rubric.md` | `mock` debrief, `postmortem`, `learn --auto` observer, `generate` (for the expectations section). |
-| `patterns.md` | Debrief/postmortem when Technical Excellence ≤3; `learn` and `generate` deep dives. |
-| `topics.md` | No problem given in `mock`, `learn` or `generate`. |
+| `rubric.md` | `mock` debrief, `postmortem`, `learn` (calibration, self-critique, `--auto` agents), `generate` (for the expectations section). |
+| `patterns.md` | Any session with a deep dive: `mock` debrief, `postmortem`, `learn`, `generate`. |
+| `topics.md` | No problem given in `mock`, `learn --auto` or `generate`; resolving a slug. |
+
+`learn --auto` subagents get the resolved level and the absolute paths of the reference files they must read.
 | `diagrams.md` | `learn` (candidate role only), `generate`, `postmortem` illustrations. Never `mock`. |
 
 ## Testing

@@ -17,7 +17,7 @@ Six phases, in this order, in about 45 minutes. The goal of the first 30 minutes
 
 **Below the line.** List what is explicitly out of scope ("Below the line: analytics, admin tools, …") in one line each. This shows you saw them and chose not to build them.
 
-**Non-functional.** Write each one as "The system should …". Start with consistency vs availability: which parts must be strongly consistent and which can be eventually consistent. Then pick the rest of three to five that matter for *this* system, from: consistency vs availability (and where), scale and read:write ratio, latency, durability, fault tolerance, security, compliance, environment constraints. Each must have a number and a scope. "Low latency" is not a requirement. "Redirects return in under 100 ms at p99" is.
+**Non-functional.** Write each one as "The system should …". Start with consistency vs availability: which parts must be strongly consistent and which can be eventually consistent. Then pick the rest of three to five that matter for *this* system, from: scale and read:write ratio, latency, durability, fault tolerance, security, compliance, environment constraints. Each must have a number and a scope. "Low latency" is not a requirement. "Redirects return in under 100 ms at p99" is.
 
 **Capacity estimates.** Skip them up front. Say so: "I'll skip estimates for now and do the math where it changes a decision." Do the math later, at the point where a number picks between two designs (e.g. whether a counter fits on one node).
 

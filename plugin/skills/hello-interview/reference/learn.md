@@ -25,7 +25,7 @@ Two subagents play interviewer and candidate. The user watches.
 
 1. **Cost check first.** Say: "This runs about 2×N subagent calls (N = `--exchanges`, default 30). Go ahead, or set a smaller N?" Wait for confirmation.
 2. **Problem.** The user's text, else pick from `topics.md`. Hold it in memory; write no files.
-3. **Every subagent prompt** includes the resolved level, the problem, and the absolute paths of the reference files it must read before answering (see the end of SKILL.md). The files are named per role below.
+3. **Every subagent prompt** includes the resolved level, the problem, and the absolute paths of the reference files it must read before answering (see Reference files in SKILL.md). The files are named per role below.
 4. **Phase hint** for exchange k of N: requirements up to 15% of N, entities and API up to 30%, high-level design up to 60%, deep dives up to 95%, then close. For pipeline problems, the data flow goes at the start of the high-level design.
 5. **Loop** until the interviewer's turn starts with `ENDING:` or N exchanges are done:
    - **Interviewer turn.** Spawn a `general-purpose` agent with: the role (strict interviewer at the resolved level, pushing back on AP1–AP8), `framework.md` and `rubric.md` to read, the current phase hint, and the full transcript. Ask for the next interviewer turn only, at most 150 words, no answers given away, prefixed `ENDING:` to close. Show it as `INTERVIEWER:`.
