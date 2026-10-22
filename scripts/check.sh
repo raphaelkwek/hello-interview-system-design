@@ -29,7 +29,7 @@ check "plugin.json name" jq -e '.name == "hello-interview-system-design"' "$ROOT
 
 # Router
 check "SKILL.md name" grep -q '^name: hello-interview-system-design$' "$SK/SKILL.md"
-check "SKILL.md user-invocable" grep -q '^user-invocable: true$' "$SK/SKILL.md"
+check "SKILL.md only claude.ai frontmatter keys" bash -c "! awk '/^---$/{n++; next} n==1 && /^[a-z-]+:/' \"$SK/SKILL.md\" | cut -d: -f1 | grep -vxE 'name|description|license|allowed-tools|metadata|compatibility'"
 check "SKILL.md runs.md row format" has "$SK/SKILL.md" '<nav>,<design>,<tech>,<comms> | <verdict> | <next>'
 check "SKILL.md slug rule" has "$SK/SKILL.md" "### Slugs"
 for f in framework rubric patterns topics diagrams mock learn postmortem generate; do

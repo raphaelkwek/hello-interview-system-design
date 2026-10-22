@@ -1,8 +1,8 @@
 ---
 name: hello-interview-system-design
 description: "Practise system design interviews the Hello Interview way: Requirements, Core Entities, API, (Data Flow), High-Level Design, Deep Dives; graded on Problem Navigation, Solution Design, Technical Excellence, and Communication & Collaboration at mid, senior or staff level. Modes: `mock` (Claude interviews you, ends with scores and a hire verdict), `learn` (Claude answers as the candidate; `--auto` runs interviewer and candidate subagents while you watch), `postmortem` (diagnose a real interview), `generate` (write a practice question plus an HI-style breakdown). Use when the user runs /hello-interview-system-design or asks for Hello Interview–style system design practice."
-argument-hint: "<mock|learn|postmortem|generate> [problem] [--level=mid|senior|staff] [--auto] [--exchanges=N] [--file=path]"
-user-invocable: true
+metadata:
+  version: "0.1.0"
 ---
 
 # Hello Interview system design practice
