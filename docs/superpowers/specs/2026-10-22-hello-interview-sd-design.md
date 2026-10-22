@@ -16,6 +16,8 @@ It borrows the *structure* of the installed `ftvision/system-design-skill` plugi
 
 ## Layout
 
+> Changed after build: the plugin now lives at the repo root (`source: "./"`, `skills/` and `.claude-plugin/plugin.json` at top level) to match the layout claude.ai accepted for interview-prep, and `dist/hello-interview-system-design.plugin` is the zip for uploading to claude.ai.
+
 ```
 hello-interview-sd/
   .claude-plugin/marketplace.json     # local marketplace, source: ./plugin

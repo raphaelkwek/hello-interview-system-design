@@ -28,6 +28,8 @@ Set a default level: `echo senior > ~/.hello-interview/level.md` (`mid`, `senior
 
 Progress lives in `~/.hello-interview/runs.md` and `weaknesses.md`.
 
+For claude.ai (Chat / Cowork): download [`dist/hello-interview-system-design.plugin`](dist/hello-interview-system-design.plugin) and upload it in claude.ai's plugin settings.
+
 Or from a local clone: `claude plugin marketplace add /path/to/hello-interview-system-design`.
 
 ## License
@@ -36,4 +38,4 @@ MIT
 
 ## Develop
 
-`scripts/check.sh` runs the structural checks.
+`scripts/check.sh` runs the structural checks. `scripts/build-plugin.sh` rebuilds the `.plugin` upload in `dist/`.

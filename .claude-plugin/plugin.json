@@ -1,0 +1,10 @@
+{
+  "name": "hello-interview-system-design",
+  "version": "0.1.0",
+  "description": "System design interview practice in the Hello Interview style: mock, learn, postmortem, generate. Unofficial.",
+  "author": {
+    "name": "raphaelkwek",
+    "url": "https://github.com/raphaelkwek"
+  },
+  "keywords": ["system-design", "interview", "mock-interview", "hello-interview"]
+}

@@ -2,7 +2,7 @@
 # Structural checks for the hello-interview-system-design plugin. Exits 1 if any check fails.
 set -u
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SK="$ROOT/plugin/skills/hello-interview-system-design"
+SK="$ROOT/skills/hello-interview-system-design"
 REF="$SK/reference"
 fails=0
 
@@ -24,8 +24,8 @@ min_rows() { [ "$(grep -cE '^\| .* \| `[a-z0-9-]+` \|' "$1")" -ge "$2" ]; }
 command -v jq >/dev/null || { echo "jq is required"; exit 2; }
 
 # Manifests
-check "marketplace.json lists ./plugin" jq -e '.plugins[0].source == "./plugin" and .plugins[0].name == "hello-interview-system-design"' "$ROOT/.claude-plugin/marketplace.json"
-check "plugin.json name + skills dir" jq -e '.name == "hello-interview-system-design" and .skills == "./skills/"' "$ROOT/plugin/.claude-plugin/plugin.json"
+check "marketplace.json lists ./" jq -e '.plugins[0].source == "./" and .plugins[0].name == "hello-interview-system-design"' "$ROOT/.claude-plugin/marketplace.json"
+check "plugin.json name" jq -e '.name == "hello-interview-system-design"' "$ROOT/.claude-plugin/plugin.json"
 
 # Router
 check "SKILL.md name" grep -q '^name: hello-interview-system-design$' "$SK/SKILL.md"
