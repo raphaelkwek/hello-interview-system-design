@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "hello-interview-sd",
+  "metadata": {
+    "description": "System design interview practice in the Hello Interview style."
+  },
+  "owner": { "name": "Raphael Kwek" },
+  "plugins": [
+    {
+      "name": "hello-interview-sd",
+      "description": "Mock, learn, postmortem and generate modes that follow the Hello Interview delivery framework and rubric.",
+      "version": "0.1.0",
+      "source": "./plugin",
+      "category": "productivity",
+      "tags": ["system-design", "interview", "hello-interview"]
+    }
+  ]
+}

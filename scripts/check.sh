@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# Structural checks for the hello-interview-sd plugin. Exits 1 if any check fails.
+set -u
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+SK="$ROOT/plugin/skills/hello-interview"
+REF="$SK/reference"
+fails=0
+
+pass() { printf 'PASS  %s\n' "$1"; }
+fail() { printf 'FAIL  %s\n' "$1"; fails=$((fails+1)); }
+check() { local name="$1"; shift; if "$@" >/dev/null 2>&1; then pass "$name"; else fail "$name"; fi; }
+has() { grep -qF -- "$2" "$1"; }
+lacks() { ! grep -rqE -- "$2" "$1"; }
+# Each literal must appear, and first occurrences must be in the given order.
+in_order() {
+  local file="$1"; shift; local last=0 n
+  for h in "$@"; do
+    n=$(grep -nF -- "$h" "$file" | head -1 | cut -d: -f1)
+    [ -n "$n" ] && [ "$n" -gt "$last" ] || return 1
+    last=$n
+  done
+}
+min_rows() { [ "$(grep -cE '^\| .* \| `[a-z0-9-]+` \|' "$1")" -ge "$2" ]; }
+
+# Manifests
+check "marketplace.json lists ./plugin" jq -e '.plugins[0].source == "./plugin" and .plugins[0].name == "hello-interview-sd"' "$ROOT/.claude-plugin/marketplace.json"
+check "plugin.json name + skills dir" jq -e '.name == "hello-interview-sd" and .skills == "./skills/"' "$ROOT/plugin/.claude-plugin/plugin.json"
+
+# Router
+check "SKILL.md name" grep -q '^name: hello-interview$' "$SK/SKILL.md"
+check "SKILL.md user-invocable" grep -q '^user-invocable: true$' "$SK/SKILL.md"
+check "SKILL.md runs.md row format" has "$SK/SKILL.md" '<nav>,<design>,<tech>,<comms> | <verdict> | <next>'
+for f in framework rubric patterns topics diagrams mock learn postmortem generate; do
+  check "reference/$f.md exists" test -s "$REF/$f.md"
+  check "SKILL.md links $f.md" has "$SK/SKILL.md" "(reference/$f.md)"
+done
+
+# framework.md
+check "framework phases in order" in_order "$REF/framework.md" "## 1. Requirements" "## 2. Core Entities" "## 3. API" "## 4. Data Flow" "## 5. High-Level Design" "## 6. Deep Dives" "## Anti-patterns"
+for i in 1 2 3 4 5 6 7 8; do check "framework AP$i" grep -q "^\*\*AP$i " "$REF/framework.md"; done
+
+# rubric.md
+for t in "Problem Navigation" "Solution Design" "Technical Excellence" "Communication & Collaboration"; do check "rubric theme: $t" has "$REF/rubric.md" "$t"; done
+check "rubric levels in order" in_order "$REF/rubric.md" "### mid" "### senior" "### staff"
+for v in "**hire**" "**lean hire**" "**lean no hire**" "**no hire**"; do check "rubric verdict $v" has "$REF/rubric.md" "$v"; done
+
+# patterns.md / topics.md / diagrams.md
+check "patterns has 8 patterns" test "$(grep -c '^## Pattern: ' "$REF/patterns.md")" -eq 8
+check "patterns ladders" has "$REF/patterns.md" "**Great:**"
+check "topics has >=24 rows" min_rows "$REF/topics.md" 24
+check "diagrams has HLD template" has "$REF/diagrams.md" "## High-level design"
+
+# Modes
+check "mock: debrief parts" in_order "$REF/mock.md" "## Debrief" "Theme scores" "Verdict" "Deep dives" "Phase timing" "Next"
+check "mock: writes runs.md" has "$REF/mock.md" "<nav>,<design>,<tech>,<comms>"
+check "mock: pause escape" has "$REF/mock.md" '`pause`'
+check "mock: cites APs" has "$REF/mock.md" "AP1"
+check "learn: HI answer order" in_order "$REF/learn.md" "Requirements" "Core Entities" "API" "High-Level Design" "Deep Dives"
+check "learn: --auto loop" has "$REF/learn.md" "ENDING:"
+check "learn: no state writes" has "$REF/learn.md" "Never write to"
+check "postmortem: one or two questions" has "$REF/postmortem.md" "one or two"
+check "postmortem: writes runs.md" has "$REF/postmortem.md" "<nav>,<design>,<tech>,<comms>"
+check "generate: breakdown order" in_order "$REF/generate.md" "## Understanding the Problem" "## The Set Up" "## High-Level Design" "## Potential Deep Dives" "## Final Design" "## What is Expected at Each Level?"
+check "generate: Bad/Good/Great" in_order "$REF/generate.md" "Bad Solution" "Good Solution" "Great Solution"
+check "generate: no overwrite" has "$REF/generate.md" "-2"
+
+# Hygiene
+check "no placeholders" lacks "$SK" 'TODO|TBD|FIXME'
+check "no dropped flags" lacks "$SK" '--say|--direction'
+check "no old command name" lacks "$SK" '/system-design|\$system-design'
+
+echo
+if [ "$fails" -gt 0 ]; then echo "$fails check(s) failed"; exit 1; fi
+echo "All checks passed"
