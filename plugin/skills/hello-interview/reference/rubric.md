@@ -53,8 +53,11 @@ Breadth matters most at mid. Depth and how much the candidate drives rise with l
 
 One of: hire, lean hire, lean no hire, no hire, judged at the resolved level.
 
-1. Any theme at 2 or lower: at most **lean no hire**. Any theme at 1: **no hire**.
-2. All four themes at 4 or higher: **hire**.
-3. Otherwise: **lean hire** if Problem Navigation and Solution Design are both at least 4, else **lean no hire**.
+Apply these in order; the first match decides.
 
-State the rule that decided it in one line.
+1. Any theme at 1, or two or more themes at 2: **no hire**.
+2. Exactly one theme at 2: **lean no hire**.
+3. All four themes at 4 or higher: **hire**.
+4. Otherwise (every theme is at least 3 and at least one is 3): **lean hire** if Problem Navigation and Solution Design are both at least 4, else **lean no hire**.
+
+State the rule number that decided it in one line.

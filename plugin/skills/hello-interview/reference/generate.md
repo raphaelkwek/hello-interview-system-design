@@ -1,6 +1,6 @@
 # generate: write a practice question and its breakdown
 
-1. **Topic.** The user's text, else pick from `topics.md` at the resolved level. Slug: the `topics.md` slug, else the topic in kebab case.
+1. **Topic.** The user's text, else pick from `topics.md` at the resolved level. Slug: per Slugs in SKILL.md, rules 2 and 3 (e.g. "url shortener" → `bitly`).
 2. **Folder.** `./hello-interview-questions/<slug>/`. If it exists, use `<slug>-2`, then `-3`, and so on. Never overwrite.
 3. **Write `question.md`**: the problem statement only, so the user can attempt it blind:
 

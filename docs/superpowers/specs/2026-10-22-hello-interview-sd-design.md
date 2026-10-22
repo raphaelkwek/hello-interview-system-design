@@ -80,7 +80,7 @@ Level calibration (breadth falls, depth and proactiveness rise):
 | senior | Real depth in ~2 areas. Spots the hard parts and own design's weaknesses unprompted. |
 | staff | Drives nearly the whole session as a peer. Depth across domains, anticipates issues before being asked. |
 
-Verdict: `hire / lean hire / lean no hire / no hire` at the resolved level. Rule: any theme ≤2 caps the verdict at lean no hire. All themes ≥4 is hire. Otherwise the verdict is judged from the level table.
+Verdict: `hire / lean hire / lean no hire / no hire` at the resolved level, by ordered rules where the first match decides: any theme at 1, or two or more at 2 → no hire; exactly one at 2 → lean no hire; all ≥4 → hire; otherwise lean hire if Problem Navigation and Solution Design are both ≥4, else lean no hire.
 
 ## Setup (every invocation)
 
@@ -91,6 +91,7 @@ Verdict: `hire / lean hire / lean no hire / no hire` at the resolved level. Rule
   - `level.md`: single token. Written by the user; the skill only reads it.
 - **Preamble** (`mock`, `postmortem`): if ≥2 rows at this level, show session count, themes scoring ≤3 in at least half of the last 4 sessions, the last 3 slugs, and the last `next` item. Otherwise skip silently.
 - Only `mock` and `postmortem` write state.
+- **Slugs:** a generated question folder name if one matches; else the `topics.md` slug matched by name or product ("url shortener" → `bitly`); else a 1–3 word kebab-case product name.
 
 ## Modes
 
@@ -99,7 +100,7 @@ Verdict: `hire / lean hire / lean no hire / no hire` at the resolved level. Rule
 - Problem: the argument verbatim, else pick from `topics.md` matching the level and not already in `runs.md`.
 - Enforce phases with time callouts ("We're ~7 minutes in, let's move to core entities"). Push back on the anti-patterns. Never volunteer architecture. `pause` drops out of role and then resumes.
 - Deep-dive behaviour by level: mid means the interviewer picks the dives; senior means wait for the candidate to name them and steer only if they miss a critical one; staff means react as a peer. Deep-dive targets are biased toward recurring weak themes.
-- Debrief (never skipped): 4 theme scores with quotes; verdict at level; each deep dive rated Bad/Good/Great with what the Great answer adds (citing `patterns.md` by section); phase-time table (actual vs target); top 2 themes to drill; 1–2 next problems as commands. Then append to `runs.md` and `weaknesses.md`.
+- Debrief (never skipped): 4 theme scores with quotes; verdict at level; each deep dive rated Bad/Good/Great with what the Great answer adds (citing `patterns.md` by section); anti-patterns hit (AP IDs with the moment); phase-time table (target vs estimated actual, at ~1.5 min per candidate turn); top 2 themes to drill; 1–2 next problems as commands. Then append to `runs.md` and `weaknesses.md`.
 
 ### `learn`: user = interviewer, Claude = candidate
 
